@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.websystique.springmvc.dao.ShopRepository;
+import com.websystique.springmvc.model.Shop;
 import com.websystique.springmvc.model.User;
 import com.websystique.springmvc.model.UserProfile;
 import com.websystique.springmvc.service.UserService;
@@ -18,11 +20,14 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ShopRepository shopRepository;
 
 	Logger log = Logger.getLogger(UserController.class);
 
-	@RequestMapping(value="/getUser")
-	public void getUser() {
+	@RequestMapping(value="/newUser")
+	public void newUser() {
 		try {
 //			User user = userService.findById(1);
 //			System.out.println(user);
@@ -48,6 +53,18 @@ public class UserController {
 					newUser.setUserProfiles(setUserProfiles);
 
 			userService.saveUser(newUser);
+		} catch(Exception e) {
+			log.info(e.getMessage(), e);
+		}
+	}
+	
+	@RequestMapping(value="/newShop")
+	public void newShop() {
+		try {
+			Shop shop = new Shop();
+			shop.setName("shopHoa");
+			shop.setEmplNumber(1);
+			shopRepository.save(shop);
 		} catch(Exception e) {
 			log.info(e.getMessage(), e);
 		}
