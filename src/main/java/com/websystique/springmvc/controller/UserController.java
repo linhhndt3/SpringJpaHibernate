@@ -61,10 +61,12 @@ public class UserController {
 	@RequestMapping(value="/newShop")
 	public void newShop() {
 		try {
+			System.out.println("prepare to process request");
 			Shop shop = new Shop();
-			shop.setName("shopHoa");
-			shop.setEmplNumber(1);
-			shopRepository.save(shop);
+//			shop.setName("shopHoa");
+//			shop.setEmplNumber(1);
+//			shopRepository.save(shop);
+			shopRepository.insertShop(shop);
 		} catch(Exception e) {
 			log.info(e.getMessage(), e);
 		}
